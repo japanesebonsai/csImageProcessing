@@ -1,10 +1,13 @@
+using System.Diagnostics.Eventing.Reader;
 using System.Windows.Forms;
+using WebCamLib;
 
 namespace ImageProcessing
 {
     public partial class Form1 : Form
     {
-        Bitmap imageA, imageB, colorgreen;
+        Bitmap imageA, imageB;
+        Device[] devices;
         public Form1()
         {
             InitializeComponent();
@@ -13,23 +16,6 @@ namespace ImageProcessing
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void buttonCopy_Click(object sender, EventArgs e)
-        {
-            if (imageA != null)
-            {
-                imageB = new Bitmap(imageA.Width, imageA.Height);
-                for (int i = 0; i < imageA.Width; i++)
-                {
-                    for (int j = 0; j < imageA.Height; j++)
-                    {
-                        Color c = imageA.GetPixel(i, j);
-                        imageB.SetPixel(i, j, c); ;
-                    }
-                }
-                pictureBox2.Image = imageB;
-            }
         }
 
         private void loadImageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -47,6 +33,36 @@ namespace ImageProcessing
             }
         }
 
+        private void loadBackgroundToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Title = "Open Image";
+                openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    imageB = new Bitmap(openFileDialog.FileName);
+                    pictureBox2.Image = imageB;
+                }
+            }
+        }
+        private void buttonCopy_Click(object sender, EventArgs e)
+        {
+            if (imageA != null)
+            {
+                imageB = new Bitmap(imageA.Width, imageA.Height);
+                for (int i = 0; i < imageA.Width; i++)
+                {
+                    for (int j = 0; j < imageA.Height; j++)
+                    {
+                        Color c = imageA.GetPixel(i, j);
+                        imageB.SetPixel(i, j, c); ;
+                    }
+                }
+                pictureBox2.Image = imageB;
+            }
+        }
         private void buttonGreyscale_Click(object sender, EventArgs e)
         {
             if (imageA != null)
@@ -57,7 +73,7 @@ namespace ImageProcessing
                     for (int j = 0; j < imageA.Height; j++)
                     {
                         Color pixel = imageA.GetPixel(i, j);
-                        int gray = (pixel.R + pixel.G + pixel.B) / 3;
+                        int gray = grayValue(pixel);
                         Color greyscaled = Color.FromArgb(gray, gray, gray);
 
                         imageB.SetPixel(i, j, greyscaled);
@@ -77,7 +93,7 @@ namespace ImageProcessing
                     for (int j = 0; j < imageA.Height; j++)
                     {
                         Color pixel = imageA.GetPixel(i, j);
-                        Color inverted = Color.FromArgb(255-pixel.R, 255-pixel.G, 255-pixel.B);
+                        Color inverted = Color.FromArgb(255 - pixel.R, 255 - pixel.G, 255 - pixel.B);
 
                         imageB.SetPixel(i, j, inverted);
                     }
@@ -98,8 +114,7 @@ namespace ImageProcessing
                     for (int j = 0; j < imageA.Height; j++)
                     {
                         Color pixel = imageA.GetPixel(i, j);
-                        int gray = (pixel.R + pixel.G + pixel.B) / 3;
-                        freq[gray]++;
+                        freq[grayValue(pixel)]++;
                     }
                 }
 
@@ -148,6 +163,83 @@ namespace ImageProcessing
                 }
                 pictureBox2.Image = imageB;
             }
+        }
+
+        private void buttonSubtract_Click(object sender, EventArgs e)
+        {
+            Color mygreen = Color.FromArgb(0, 255, 0);
+            int greygreen = (mygreen.R + mygreen.G + mygreen.B) / 3;
+            int threshold = 5;
+            int width = Math.Min(imageA.Width, imageB.Width);
+            int height = Math.Min(imageA.Height, imageB.Height);
+            Bitmap resultImage = new Bitmap(width, height);
+
+            for (int i = 0; i < width; i++)
+            {
+                for (int j = 0; j < height; j++)
+                {
+                    Color pixel = imageA.GetPixel(i, j);
+                    Color backpixel = imageB.GetPixel(i, j);
+
+                    int diffR = Math.Abs(pixel.R - mygreen.R);
+                    int diffG = Math.Abs(pixel.G - mygreen.G);
+                    int diffB = Math.Abs(pixel.B - mygreen.B);
+                    int subtractvalue = (diffR + diffG + diffB) / 3;
+
+                    if (subtractvalue > threshold)
+                        resultImage.SetPixel(i, j, pixel);
+                    else
+                        resultImage.SetPixel(i, j, backpixel);
+                }
+            }
+            pictureBox3.Image = resultImage;
+        }
+
+        private void turnOnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            devices = DeviceManager.GetAllDevices();
+            devices[0].ShowWindow(pictureBox1);
+        }
+
+        private void turnOffToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            devices[0].Stop();
+        }
+
+        private void buttonCameraCopy_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void buttonCameraGreyscale_Click(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        private void buttonCameraInversion_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonCameraHistogram_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonCameraSepia_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonCameraSubtract_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private int grayValue(Color c){
+            return (c.R + c.G + c.B) / 3;
         }
     }
 }
