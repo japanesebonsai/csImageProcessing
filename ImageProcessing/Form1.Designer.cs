@@ -63,7 +63,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, cameraToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1167, 24);
+            menuStrip1.Size = new Size(1264, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -73,7 +73,6 @@
             toolStripMenuItem1.Name = "toolStripMenuItem1";
             toolStripMenuItem1.Size = new Size(37, 20);
             toolStripMenuItem1.Text = "File";
-            toolStripMenuItem1.Click += toolStripMenuItem1_Click;
             // 
             // loadImageToolStripMenuItem
             // 
@@ -112,18 +111,18 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(42, 58);
+            pictureBox1.Location = new Point(8, 134);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(324, 365);
+            pictureBox1.Size = new Size(413, 232);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
             // 
             // pictureBox2
             // 
-            pictureBox2.Location = new Point(418, 58);
+            pictureBox2.Location = new Point(427, 134);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(324, 365);
+            pictureBox2.Size = new Size(413, 232);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 2;
             pictureBox2.TabStop = false;
@@ -132,7 +131,7 @@
             // 
             buttonCopy.Location = new Point(42, 460);
             buttonCopy.Name = "buttonCopy";
-            buttonCopy.Size = new Size(75, 23);
+            buttonCopy.Size = new Size(110, 25);
             buttonCopy.TabIndex = 3;
             buttonCopy.Text = "Copy";
             buttonCopy.UseVisualStyleBackColor = true;
@@ -140,9 +139,9 @@
             // 
             // buttonGreyscale
             // 
-            buttonGreyscale.Location = new Point(123, 460);
+            buttonGreyscale.Location = new Point(158, 460);
             buttonGreyscale.Name = "buttonGreyscale";
-            buttonGreyscale.Size = new Size(75, 23);
+            buttonGreyscale.Size = new Size(110, 25);
             buttonGreyscale.TabIndex = 4;
             buttonGreyscale.Text = "Greyscale";
             buttonGreyscale.UseVisualStyleBackColor = true;
@@ -150,9 +149,9 @@
             // 
             // buttonColorInversion
             // 
-            buttonColorInversion.Location = new Point(204, 460);
+            buttonColorInversion.Location = new Point(274, 460);
             buttonColorInversion.Name = "buttonColorInversion";
-            buttonColorInversion.Size = new Size(75, 23);
+            buttonColorInversion.Size = new Size(110, 25);
             buttonColorInversion.TabIndex = 5;
             buttonColorInversion.Text = "Inversion";
             buttonColorInversion.UseVisualStyleBackColor = true;
@@ -160,9 +159,9 @@
             // 
             // buttonHistogram
             // 
-            buttonHistogram.Location = new Point(285, 460);
+            buttonHistogram.Location = new Point(390, 460);
             buttonHistogram.Name = "buttonHistogram";
-            buttonHistogram.Size = new Size(75, 23);
+            buttonHistogram.Size = new Size(110, 25);
             buttonHistogram.TabIndex = 6;
             buttonHistogram.Text = "Histogram";
             buttonHistogram.UseVisualStyleBackColor = true;
@@ -170,9 +169,9 @@
             // 
             // buttonSepia
             // 
-            buttonSepia.Location = new Point(366, 460);
+            buttonSepia.Location = new Point(42, 501);
             buttonSepia.Name = "buttonSepia";
-            buttonSepia.Size = new Size(75, 23);
+            buttonSepia.Size = new Size(110, 25);
             buttonSepia.TabIndex = 7;
             buttonSepia.Text = "Sepia";
             buttonSepia.UseVisualStyleBackColor = true;
@@ -180,18 +179,18 @@
             // 
             // pictureBox3
             // 
-            pictureBox3.Location = new Point(793, 58);
+            pictureBox3.Location = new Point(846, 134);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(324, 365);
+            pictureBox3.Size = new Size(413, 232);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 8;
             pictureBox3.TabStop = false;
             // 
             // buttonSubtract
             // 
-            buttonSubtract.Location = new Point(42, 501);
+            buttonSubtract.Location = new Point(158, 501);
             buttonSubtract.Name = "buttonSubtract";
-            buttonSubtract.Size = new Size(75, 23);
+            buttonSubtract.Size = new Size(110, 25);
             buttonSubtract.TabIndex = 9;
             buttonSubtract.Text = "Subtract";
             buttonSubtract.UseVisualStyleBackColor = true;
@@ -219,7 +218,7 @@
             // 
             buttonCameraCopy.Location = new Point(720, 460);
             buttonCameraCopy.Name = "buttonCameraCopy";
-            buttonCameraCopy.Size = new Size(75, 23);
+            buttonCameraCopy.Size = new Size(110, 25);
             buttonCameraCopy.TabIndex = 12;
             buttonCameraCopy.Text = "Copy";
             buttonCameraCopy.UseVisualStyleBackColor = true;
@@ -227,9 +226,9 @@
             // 
             // buttonCameraGreyscale
             // 
-            buttonCameraGreyscale.Location = new Point(801, 460);
+            buttonCameraGreyscale.Location = new Point(836, 460);
             buttonCameraGreyscale.Name = "buttonCameraGreyscale";
-            buttonCameraGreyscale.Size = new Size(75, 23);
+            buttonCameraGreyscale.Size = new Size(110, 25);
             buttonCameraGreyscale.TabIndex = 13;
             buttonCameraGreyscale.Text = "Greyscale";
             buttonCameraGreyscale.UseVisualStyleBackColor = true;
@@ -237,9 +236,9 @@
             // 
             // buttonCameraInversion
             // 
-            buttonCameraInversion.Location = new Point(882, 460);
+            buttonCameraInversion.Location = new Point(952, 460);
             buttonCameraInversion.Name = "buttonCameraInversion";
-            buttonCameraInversion.Size = new Size(75, 23);
+            buttonCameraInversion.Size = new Size(110, 25);
             buttonCameraInversion.TabIndex = 14;
             buttonCameraInversion.Text = "Inversion";
             buttonCameraInversion.UseVisualStyleBackColor = true;
@@ -247,9 +246,9 @@
             // 
             // buttonCameraHistogram
             // 
-            buttonCameraHistogram.Location = new Point(963, 460);
+            buttonCameraHistogram.Location = new Point(1068, 460);
             buttonCameraHistogram.Name = "buttonCameraHistogram";
-            buttonCameraHistogram.Size = new Size(75, 23);
+            buttonCameraHistogram.Size = new Size(110, 25);
             buttonCameraHistogram.TabIndex = 15;
             buttonCameraHistogram.Text = "Histogram";
             buttonCameraHistogram.UseVisualStyleBackColor = true;
@@ -257,9 +256,9 @@
             // 
             // buttonCameraSepia
             // 
-            buttonCameraSepia.Location = new Point(1044, 460);
+            buttonCameraSepia.Location = new Point(720, 501);
             buttonCameraSepia.Name = "buttonCameraSepia";
-            buttonCameraSepia.Size = new Size(75, 23);
+            buttonCameraSepia.Size = new Size(110, 25);
             buttonCameraSepia.TabIndex = 16;
             buttonCameraSepia.Text = "Sepia";
             buttonCameraSepia.UseVisualStyleBackColor = true;
@@ -267,9 +266,9 @@
             // 
             // buttonCameraSubtract
             // 
-            buttonCameraSubtract.Location = new Point(720, 501);
+            buttonCameraSubtract.Location = new Point(836, 501);
             buttonCameraSubtract.Name = "buttonCameraSubtract";
-            buttonCameraSubtract.Size = new Size(75, 23);
+            buttonCameraSubtract.Size = new Size(110, 25);
             buttonCameraSubtract.TabIndex = 17;
             buttonCameraSubtract.Text = "Subtract";
             buttonCameraSubtract.UseVisualStyleBackColor = true;
@@ -279,7 +278,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1167, 590);
+            ClientSize = new Size(1264, 681);
             Controls.Add(buttonCameraSubtract);
             Controls.Add(buttonCameraSepia);
             Controls.Add(buttonCameraHistogram);
