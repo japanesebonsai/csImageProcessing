@@ -10,7 +10,6 @@ namespace ImageProcessing
     {
         private ImageModel _model;
         private ImageController _controller;
-        private CameraModel _cameraModel;
         private CameraController _cameraController;
         private Device[] devices;
 
@@ -20,8 +19,7 @@ namespace ImageProcessing
 
             _model = new ImageModel();
             _controller = new ImageController(_model);
-            _cameraModel = new CameraModel();
-            _cameraController = new CameraController(_cameraModel);
+            _cameraController = new CameraController(_model);
         }
 
         private void loadImageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -59,6 +57,7 @@ namespace ImageProcessing
             _cameraController.TurnOff();
         }
 
+        //ImageController
         private void buttonCopy_Click(object sender, EventArgs e)
         {
             pictureBox2.Image = _controller.Copy();
@@ -89,28 +88,35 @@ namespace ImageProcessing
             pictureBox3.Image = _controller.Subtract();
         }
 
+        //CameraController
         private void buttonCameraCopy_Click(object sender, EventArgs e)
         {
+            _cameraController.CaptureFrame();
             pictureBox2.Image = _cameraController.Copy();
         }
         private void buttonCameraGreyscale_Click(object sender, EventArgs e)
         {
+            _cameraController.CaptureFrame();
             pictureBox2.Image = _cameraController.Greyscale();
         }
         private void buttonCameraInversion_Click(object sender, EventArgs e)
         {
+            _cameraController.CaptureFrame();
             pictureBox2.Image = _cameraController.Inversion();
         }
         private void buttonCameraSepia_Click(object sender, EventArgs e)
         {
+            _cameraController.CaptureFrame();
             pictureBox2.Image = _cameraController.Sepia();
         }
         private void buttonCameraHistogram_Click(object sender, EventArgs e)
         {
+            _cameraController.CaptureFrame();
             pictureBox2.Image = _cameraController.Histogram();
         }
         private void buttonCameraSubtract_Click(object sender, EventArgs e)
         {
+            _cameraController.CaptureFrame();
             pictureBox3.Image = _cameraController.Subtract();
         }
     }

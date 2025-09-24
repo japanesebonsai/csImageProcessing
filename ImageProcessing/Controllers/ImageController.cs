@@ -18,20 +18,33 @@ namespace ImageProcessing.Controllers
             _model = model;
         }
 
-        private int GetGrayValue(Color c)
+        private int GetGrayValue(Color c) => (c.R + c.G + c.B) / 3;
+        private bool CheckImages(bool CheckB=false)
         {
-            return(c.R + c.G + c.B) / 3;
+            if(_model.ImageA == null)
+            {
+                MessageBox.Show("Must load an image to proceed.");
+                return false;
+            }
+
+            if (CheckB && _model.ImageB == null)
+            {
+                MessageBox.Show("Must load an image to be subtracted.");
+                return false;
+            }
+
+            return true;
         }
         public Bitmap Copy()
         {
-            if (_model.ImageA == null) return null;
+            if (!CheckImages()) return null;
 
             Bitmap result = new Bitmap(_model.ImageA.Width, _model.ImageA.Height);
-            for (int i = 0; i < result.Width; i++)
+            for (int x = 0; x < _model.ImageA.Width; x++)
             {
-                for (int j = 0; j < result.Height; j++)
+                for (int y = 0; y < _model.ImageA.Height; y++)
                 {
-                    result.SetPixel(i, j, _model.ImageA.GetPixel(i, j));
+                    result.SetPixel(x, y, _model.ImageA.GetPixel(x, y));
                 }
             }
             _model.ImageB = result;
@@ -40,16 +53,16 @@ namespace ImageProcessing.Controllers
 
         public Bitmap Greyscale()
         {
-            if (_model.ImageA == null) return null;
+            if (!CheckImages()) return null;
 
             Bitmap result = new Bitmap(_model.ImageA.Width, _model.ImageA.Height);
-            for (int i = 0; i < result.Width; i++)
+            for (int x = 0; x < _model.ImageA.Width; x++)
             {
-                for (int j = 0; j < result.Height; j++)
+                for (int y = 0; y < _model.ImageA.Height; y++)
                 {
-                    Color pixel = _model.ImageA.GetPixel(i, j);
-                    int gray = (pixel.R + pixel.G + pixel.B) / 3;
-                    result.SetPixel(i, j, Color.FromArgb(gray, gray, gray));
+                    Color pixel = _model.ImageA.GetPixel(x, y);
+                    int gray = GetGrayValue(pixel);
+                    result.SetPixel(x, y, Color.FromArgb(gray, gray, gray));
                 }
             }
             _model.ImageB = result;
@@ -58,27 +71,27 @@ namespace ImageProcessing.Controllers
 
         public Bitmap Inversion()
         {
-            if (_model.ImageA == null) return null;
-                
-                Bitmap result = new Bitmap (_model.ImageA.Width, _model.ImageA.Height);
-                for (int i = 0; i < _model.ImageA.Width; i++)
-                {
-                    for (int j = 0; j < _model.ImageA.Height; j++)
-                    {
-                        Color pixel = _model.ImageA.GetPixel(i, j);
-                        Color inverted = Color.FromArgb(255 - pixel.R, 255 - pixel.G, 255 - pixel.B);
+            if (!CheckImages()) return null;
 
-                        result.SetPixel(i, j, inverted);
-                    }
+            Bitmap result = new Bitmap (_model.ImageA.Width, _model.ImageA.Height);
+            for (int x = 0; x < _model.ImageA.Width; x++)
+            {
+                for (int y = 0; y < _model.ImageA.Height; y++)
+                {
+                    Color pixel = _model.ImageA.GetPixel(x, y);
+                    Color inverted = Color.FromArgb(255 - pixel.R, 255 - pixel.G, 255 - pixel.B);
+
+                    result.SetPixel(x, y, inverted);
                 }
-                _model.ImageB = result;
-                return result;
-        }
+            }
+            _model.ImageB = result;
+            return result;
+    }
 
         public Bitmap Histogram()
         {
-            if (_model.ImageA == null) return null;
-           
+            if (!CheckImages()) return null;
+
             int[] freq = new int[256];
 
             for (int i = 0; i < _model.ImageA.Width; i++)
@@ -111,14 +124,14 @@ namespace ImageProcessing.Controllers
 
         public Bitmap Sepia()
         {
-            if (_model.ImageA == null) return null;
- 
+            if (!CheckImages()) return null;
+
             Bitmap result = new Bitmap(_model.ImageA.Width, _model.ImageA.Height);
-            for (int i = 0; i < _model.ImageA.Width; i++)
+            for (int x = 0; x < _model.ImageA.Width; x++)
             {
-                for (int j = 0; j < _model.ImageA.Height; j++)
+                for (int y = 0; y < _model.ImageA.Height; y++)
                 {
-                    Color pixel = _model.ImageA.GetPixel(i, j);
+                    Color pixel = _model.ImageA.GetPixel(x, y);
                     int r = (int)((0.393 * pixel.R) + (0.769 * pixel.G) + (0.189 * pixel.B));
                     int g = (int)((0.349 * pixel.R) + (0.686 * pixel.G) + (0.168 * pixel.B));
                     int b = (int)((0.272 * pixel.R) + (0.534 * pixel.G) + (0.131 * pixel.B));
@@ -128,7 +141,7 @@ namespace ImageProcessing.Controllers
                     b = Math.Min(255, Math.Max(0, b));
                     Color sepia = Color.FromArgb(r, g, b);
 
-                    result.SetPixel(i, j, sepia);
+                    result.SetPixel(x, y, sepia);
                 }
             }
             _model.ImageB = result;
@@ -137,7 +150,7 @@ namespace ImageProcessing.Controllers
 
         public Bitmap Subtract()
         {
-            if (_model.ImageA == null || _model.ImageB == null) return null;
+            if (!CheckImages(CheckB:true)) return null;
 
             Color myGreen = Color.FromArgb(0, 255, 0);
             int grayGreen = GetGrayValue(myGreen);
@@ -148,9 +161,9 @@ namespace ImageProcessing.Controllers
 
             Bitmap result = new Bitmap(width, height);
 
-            for (int x = 0; x < width; ++x)
+            for (int x = 0; x < width; x++)
             {
-                for (int y = 0; y < height; ++y)
+                for (int y = 0; y < height; y++)
                 {
                     Color pixel = _model.ImageA.GetPixel(x, y);
                     Color backpixel = _model.ImageB.GetPixel(x, y);
