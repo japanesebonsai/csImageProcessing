@@ -32,6 +32,12 @@ namespace ImageProcessing.Controllers
             {
                 _model.CurrentFrame?.Dispose();
                 _model.CurrentFrame = (Bitmap)frame.Clone();
+
+                _model.OriginalImage?.Dispose();
+                _model.OriginalImage = (Bitmap)_model.CurrentFrame.Clone();
+
+                _model.ProcessedImage?.Dispose();
+                _model.ProcessedImage = (Bitmap)_model.CurrentFrame.Clone();
             }
         }
 

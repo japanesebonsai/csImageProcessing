@@ -25,7 +25,7 @@ namespace ImageProcessing
             _fileController = new FileController();
 
             _timer = new System.Windows.Forms.Timer { Interval = 30 };
-            _timer.Tick += DisplayCameraFrame;
+            _timer.Tick += DisplayFrame;
         }
 
         // FileController
@@ -59,15 +59,25 @@ namespace ImageProcessing
             pictureBox1.Image?.Dispose();
             pictureBox1.Image = null;
         }
-        private void DisplayCameraFrame(object sender, EventArgs e)
+        private void DisplayFrame(object sender, EventArgs e)
         {
-            _cameraController.UpdateFrame();
-            if (_model.CurrentFrame != null)
+            if (_model.IsCameraOn)
+            {
+                _cameraController.UpdateFrame();
+            }
+
+            if (_model.IsGif && _model.OriginalImage != null)
+            {
+                ImageAnimator.UpdateFrames(_model.OriginalImage);
+            }
+
+            if (_model.ProcessedImage != null)
             {
                 pictureBox1.Image?.Dispose();
-                pictureBox1.Image = (Bitmap)_model.CurrentFrame.Clone();
+                pictureBox1.Image = (Bitmap)_model.ProcessedImage.Clone();
             }
         }
+
 
         // BasicImageController
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)

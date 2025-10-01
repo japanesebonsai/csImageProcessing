@@ -1,74 +1,72 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using ImageProcessing.Models;
 
 namespace ImageProcessing.Controllers
 {
-    internal class FileController
+    public class FileController
     {
-        public void LoadImage(PictureBox pictureBox1, SourceModel _model)
+        public void LoadImage(PictureBox pictureBox, SourceModel model)
         {
             using var dlg = new OpenFileDialog();
             dlg.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                _model.OriginalImage = new Bitmap(dlg.FileName);
-                pictureBox1.Image = _model.OriginalImage;
+                model.OriginalImage?.Dispose();
+                model.OriginalImage = new Bitmap(dlg.FileName);
+                pictureBox.Image = (Bitmap)model.OriginalImage.Clone();
             }
         }
 
-        //Issue here when saving subtracted images
-        public void SaveImage(PictureBox pictureBox2, SourceModel _model)
+        public void LoadBackground(PictureBox pictureBox, SourceModel model)
         {
+            using var dlg = new OpenFileDialog();
+            dlg.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                model.ProcessedImage?.Dispose();
+                model.ProcessedImage = new Bitmap(dlg.FileName);
+                pictureBox.Image = (Bitmap)model.ProcessedImage.Clone();
+            }
+        }
+
+        public void SaveImage(PictureBox pictureBox, SourceModel model)
+        {
+            if (model.ProcessedImage == null)
+            {
+                MessageBox.Show("No processed image available to save.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             using var dlg = new SaveFileDialog();
             dlg.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
             dlg.Title = "Save Image";
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                if (_model.ProcessedImage != null)
-                {
-                    var ext = Path.GetExtension(dlg.FileName).ToLower();
-                    var format = System.Drawing.Imaging.ImageFormat.Png;
-
-                    switch (ext)
-                    {
-                        case ".jpg":
-                        case ".jpeg":
-                            format = System.Drawing.Imaging.ImageFormat.Jpeg;
-                            break;
-                        case ".bmp":
-                            format = System.Drawing.Imaging.ImageFormat.Bmp;
-                            break;
-                        case ".gif":
-                            format = System.Drawing.Imaging.ImageFormat.Gif;
-                            break;
-                    }
-
-                    _model.ProcessedImage.Save(dlg.FileName, format);
-                }
-                else
-                {
-                    MessageBox.Show("No ImageB available to save.", "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-
-        public void LoadBackground(PictureBox pictureBox2, SourceModel _model)
-        {
-            using var dlg = new OpenFileDialog();
-            dlg.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                _model.ProcessedImage = new Bitmap(dlg.FileName);
-                pictureBox2.Image = _model.ProcessedImage;
+                var ext = Path.GetExtension(dlg.FileName).ToLower();
+                var format = System.Drawing.Imaging.ImageFormat.Png;
+
+                switch (ext)
+                {
+                    case ".jpg":
+                    case ".jpeg":
+                        format = System.Drawing.Imaging.ImageFormat.Jpeg;
+                        break;
+                    case ".bmp":
+                        format = System.Drawing.Imaging.ImageFormat.Bmp;
+                        break;
+                    case ".gif":
+                        format = System.Drawing.Imaging.ImageFormat.Gif;
+                        break;
+                }
+
+                model.ProcessedImage.Save(dlg.FileName, format);
             }
         }
     }
