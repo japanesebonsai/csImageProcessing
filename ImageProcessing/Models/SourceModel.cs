@@ -8,6 +8,8 @@ namespace ImageProcessing.Models
         public Bitmap ProcessedImage { get; set; }
         public Bitmap SubtractedImage { get; set; }
 
+        public Bitmap CurrentFrame { get; set; }
+
         public bool IsCameraOn { get; set; }
     }
 }

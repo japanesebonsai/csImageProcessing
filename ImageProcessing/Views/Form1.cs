@@ -10,7 +10,9 @@ namespace ImageProcessing
         private SourceModel _model;
         private BasicImageController _basicImageController;
         private ConvMatrixController _convMatrixController;
+        private CameraController _cameraController;
         private FileController _fileController;
+        private readonly System.Windows.Forms.Timer _timer;
 
         public Form1()
         {
@@ -19,7 +21,11 @@ namespace ImageProcessing
             _model = new SourceModel();
             _basicImageController = new BasicImageController(_model);
             _convMatrixController = new ConvMatrixController(_model);
+            _cameraController = new CameraController(_model);
             _fileController = new FileController();
+
+            _timer = new System.Windows.Forms.Timer { Interval = 30 };
+            _timer.Tick += DisplayCameraFrame;
         }
 
         // FileController
@@ -38,15 +44,29 @@ namespace ImageProcessing
             _fileController.SaveImage(pictureBox2, _model);
         }
 
-        // CameraController
-        private void turnOnToolStripMenuItem_Click(object sender, EventArgs e)
+        //CameraController
+        private void turnOnCameraButton_Click(object sender, EventArgs e)
         {
-            // _cameraController.TurnOn(pictureBox1);
+            _cameraController.TurnOn();
+            _timer.Start();
         }
+
 
         private void turnOffToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // _cameraController.TurnOff();
+            _timer.Stop();
+            _cameraController.TurnOff();
+            pictureBox1.Image?.Dispose();
+            pictureBox1.Image = null;
+        }
+        private void DisplayCameraFrame(object sender, EventArgs e)
+        {
+            _cameraController.UpdateFrame();
+            if (_model.CurrentFrame != null)
+            {
+                pictureBox1.Image?.Dispose();
+                pictureBox1.Image = (Bitmap)_model.CurrentFrame.Clone();
+            }
         }
 
         // BasicImageController
