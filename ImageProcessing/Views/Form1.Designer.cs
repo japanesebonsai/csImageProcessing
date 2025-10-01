@@ -52,12 +52,12 @@
             lossyToolStripMenuItem = new ToolStripMenuItem();
             horizontalOnlyToolStripMenuItem = new ToolStripMenuItem();
             verticalOnlyToolStripMenuItem = new ToolStripMenuItem();
-            pictureBox1 = new PictureBox();
-            pictureBox2 = new PictureBox();
-            pictureBox3 = new PictureBox();
             cameraToolStripMenuItem = new ToolStripMenuItem();
             turnOnToolStripMenuItem = new ToolStripMenuItem();
             turnOffToolStripMenuItem = new ToolStripMenuItem();
+            pictureBox1 = new PictureBox();
+            pictureBox2 = new PictureBox();
+            pictureBox3 = new PictureBox();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -69,7 +69,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, imageProcessingToolStripMenuItem, filterToolStripMenuItem, cameraToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1264, 24);
+            menuStrip1.Size = new Size(1277, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -83,21 +83,21 @@
             // loadImageToolStripMenuItem
             // 
             loadImageToolStripMenuItem.Name = "loadImageToolStripMenuItem";
-            loadImageToolStripMenuItem.Size = new Size(180, 22);
+            loadImageToolStripMenuItem.Size = new Size(167, 22);
             loadImageToolStripMenuItem.Text = "Load Image";
             loadImageToolStripMenuItem.Click += loadImageToolStripMenuItem_Click;
             // 
             // loadBackgroundToolStripMenuItem
             // 
             loadBackgroundToolStripMenuItem.Name = "loadBackgroundToolStripMenuItem";
-            loadBackgroundToolStripMenuItem.Size = new Size(180, 22);
+            loadBackgroundToolStripMenuItem.Size = new Size(167, 22);
             loadBackgroundToolStripMenuItem.Text = "Load Background";
             loadBackgroundToolStripMenuItem.Click += loadBackgroundToolStripMenuItem_Click;
             // 
             // saveImageToolStripMenuItem
             // 
             saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
-            saveImageToolStripMenuItem.Size = new Size(180, 22);
+            saveImageToolStripMenuItem.Size = new Size(167, 22);
             saveImageToolStripMenuItem.Text = "Save Image";
             saveImageToolStripMenuItem.Click += saveImageToolStripMenuItem_Click;
             // 
@@ -105,8 +105,8 @@
             // 
             imageProcessingToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { copyToolStripMenuItem, greyscaleToolStripMenuItem, colorInversionToolStripMenuItem, histogramToolStripMenuItem, sepiaToolStripMenuItem, subtractToolStripMenuItem });
             imageProcessingToolStripMenuItem.Name = "imageProcessingToolStripMenuItem";
-            imageProcessingToolStripMenuItem.Size = new Size(112, 20);
-            imageProcessingToolStripMenuItem.Text = "Image Processing";
+            imageProcessingToolStripMenuItem.Size = new Size(82, 20);
+            imageProcessingToolStripMenuItem.Text = "Basic Image";
             // 
             // copyToolStripMenuItem
             // 
@@ -191,7 +191,6 @@
             embossingToolStripMenuItem.Name = "embossingToolStripMenuItem";
             embossingToolStripMenuItem.Size = new Size(153, 22);
             embossingToolStripMenuItem.Text = "Emboss";
-            embossingToolStripMenuItem.Click += embossingToolStripMenuItem_Click;
             // 
             // laplascianToolStripMenuItem
             // 
@@ -235,36 +234,6 @@
             verticalOnlyToolStripMenuItem.Text = "Vertical Only";
             verticalOnlyToolStripMenuItem.Click += verticalOnlyToolStripMenuItem_Click;
             // 
-            // pictureBox1
-            // 
-            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox1.Location = new Point(8, 134);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(413, 232);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 1;
-            pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox2.Location = new Point(427, 134);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(413, 232);
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.TabIndex = 2;
-            pictureBox2.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox3.Location = new Point(846, 134);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(413, 232);
-            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox3.TabIndex = 8;
-            pictureBox3.TabStop = false;
-            // 
             // cameraToolStripMenuItem
             // 
             cameraToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { turnOnToolStripMenuItem, turnOffToolStripMenuItem });
@@ -275,22 +244,51 @@
             // turnOnToolStripMenuItem
             // 
             turnOnToolStripMenuItem.Name = "turnOnToolStripMenuItem";
-            turnOnToolStripMenuItem.Size = new Size(180, 22);
+            turnOnToolStripMenuItem.Size = new Size(119, 22);
             turnOnToolStripMenuItem.Text = "Turn On";
-            turnOnToolStripMenuItem.Click += turnOnToolStripMenuItem_Click;
+            turnOnToolStripMenuItem.Click += turnOffToolStripMenuItem_Click;
             // 
             // turnOffToolStripMenuItem
             // 
             turnOffToolStripMenuItem.Name = "turnOffToolStripMenuItem";
-            turnOffToolStripMenuItem.Size = new Size(180, 22);
+            turnOffToolStripMenuItem.Size = new Size(119, 22);
             turnOffToolStripMenuItem.Text = "Turn Off";
-            turnOnToolStripMenuItem.Click += turnOffToolStripMenuItem_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
+            pictureBox1.Location = new Point(10, 50);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(413, 480);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 1;
+            pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.BorderStyle = BorderStyle.FixedSingle;
+            pictureBox2.Location = new Point(433, 50);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(413, 480);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 2;
+            pictureBox2.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.BorderStyle = BorderStyle.FixedSingle;
+            pictureBox3.Location = new Point(856, 50);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(413, 480);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox3.TabIndex = 8;
+            pictureBox3.TabStop = false;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1264, 681);
+            ClientSize = new Size(1277, 681);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);

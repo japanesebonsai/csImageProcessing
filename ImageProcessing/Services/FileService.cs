@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ImageProcessing.Controllers
+namespace ImageProcessing.Services
 {
-    internal class CameraController
+    internal class FileService
     {
     }
 }
