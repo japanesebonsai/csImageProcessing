@@ -17,10 +17,16 @@ namespace ImageProcessing.Controllers
             _cameraService = new CameraService();
         }
 
-        public void TurnOn() => _cameraService.StartCamera();
+        public void TurnOn()
+        {
+            _cameraService.StartCamera();
+            _model.IsCameraOn = true;
+        }
         public void TurnOff()
         {
             _cameraService.StopCamera();
+            _model.IsCameraOn = false;
+
             _model.CurrentFrame?.Dispose();
             _model.CurrentFrame = null;
         }

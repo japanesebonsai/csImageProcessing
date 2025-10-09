@@ -246,13 +246,14 @@
             turnOnToolStripMenuItem.Name = "turnOnToolStripMenuItem";
             turnOnToolStripMenuItem.Size = new Size(119, 22);
             turnOnToolStripMenuItem.Text = "Turn On";
-            turnOnToolStripMenuItem.Click += turnOffToolStripMenuItem_Click;
+            turnOnToolStripMenuItem.Click += turnOnToolStripMenuItem_Click;
             // 
             // turnOffToolStripMenuItem
             // 
             turnOffToolStripMenuItem.Name = "turnOffToolStripMenuItem";
             turnOffToolStripMenuItem.Size = new Size(119, 22);
             turnOffToolStripMenuItem.Text = "Turn Off";
+            turnOffToolStripMenuItem.Click += turnOffToolStripMenuItem_Click;
             // 
             // pictureBox1
             // 

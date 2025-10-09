@@ -51,6 +51,12 @@ namespace ImageProcessing
             _timer.Start();
         }
 
+        private void turnOnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _cameraController.TurnOn();
+            _timer.Start();
+        }
+
 
         private void turnOffToolStripMenuItem_Click(object sender, EventArgs e)
         {
